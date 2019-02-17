@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>	
+<head>
+
+<title>Car Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  	<style type="text/css">
+/*  		.navbar {
+      margin-bottom: 0;
+      background-color: #220459;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }*/
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #220459;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #220459;
+  color: white;
+}
+
+
+
+#body {
+	margin-left: 225px;
+}
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 100;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<div id="main">
+<div class="sidebar">
+  <a class="active" href="#home">Home</a>
+  <a href="#automatic">Automatic</a>
+  <a href="#manual">Manual</a>
+  <a href="#Hatchback">Hatchback</a>
+  <a href="#Sedan">Sedan</a>
+  <a href="#suv">SUV</a>
+  <a href="#minisuv">Mini SUV</a>
+  <a href="#petrol">Petrol</a>
+  <a href="#diesel">Diesel</a>
+
+  <a class="active" href="#">Price: Low to High</a>
+</div>
+
+<div id = 'body'>
+	<h1 style="color: #220459; margin: 0 auto; padding-left: 30vw; padding-top: 20px; padding-bottom: 20px; font-size: 60px;"> Car Rentals</h1>
+	<div class="ui three stackable cards" id= "cars">
+	
+	</div>
+</div>
+	
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+
+	var car_data = [
+	{
+        "Name": "Hyundai Eon",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505389673_1500892609_eon.webp",
+        "Price": 1100,
+        "Location": "Indiranagar",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Petrol",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+	{
+        "Name": "Tata Bolt",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505297592_1500892399_bolt.webp",
+        "Price": 1150,
+        "Location": "HSR Layout",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Ignis",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1526893284_ignis.webp",
+        "Price": 1150,
+        "Location": "Indiranagar",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Petrol",
+        "Transmission": "Automatic",
+        "Car_Type": "Hatchback"
+    },
+	{
+        "Name": "Maruti Ritz",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505295259_1500892807_ritz2%281%29.webp",
+        "Price": 1180,
+        "Location": "HSR Layout",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Petrol",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Hyundai Grand i10",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517236166_1509779915_152_i10.webp",
+        "Price": 1301,
+        "Location": "Koramangala",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Petrol",
+        "Transmission": "Automatic",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Mahindra TUV300",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1508769709_tuv300_CARDIMENSION%282%29.png",
+        "Price": 1360,
+        "Location": "Koramangala",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 7,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "SUV"
+    },
+    {
+        "Name": "Hyundai i20 Magna",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517235691_1503654158_i20_magna_carimage_1_.webp",
+        "Price": 1430,
+        "Location": "Koramangala",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Maruti Suzuki Baleno",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517234251_1503651026_balenoimage_carimage.webp",
+        "Price": 1433,
+        "Location": "Indiranagar",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Mahindra Verito",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1539321232_mahindra_Vertio_new_final.webp",
+        "Price": 1440,
+        "Location": "Koramangala",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Sedan"
+    },
+    {
+        "Name": "Hyundai Xcent",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505390422_1500896796_xcent.webp",
+        "Price": 1450,
+        "Location": "HSR Layout",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Sedan"
+    },
+    {
+        "Name": "Honda Jazz",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505393385_1504243587_jazz_CARDIMENSION.webp",
+        "Price": 1500,
+        "Location": "Indiranagar",
+        "Availability": ["Sat", "Sun"],
+        "Seats": 5,
+        "Fuel_Type": "Petrol",
+        "Transmission": "Manual",
+        "Car_Type": "Hatchback"
+    },
+    {
+        "Name": "Honda Amaze 2018",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1545022905_amaze2018.webp",
+        "Price": 1570,
+        "Location": "Koramangala",
+        "Availability": ["Sat", "Sun"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Automatic",
+        "Car_Type": "Sedan"
+    },
+    {
+        "Name": "Suzuki Vitara Brezza",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1522147962_vitarabrezza-final_CARDIMENSION.webp",
+        "Price": 1580,
+        "Location": "HSR Layout",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Mini SUV"
+    },
+    {
+        "Name": "Hyundai Creta",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517236391_1511333933_creta_CARDIMENSION.webp",
+        "Price": 1700,
+        "Location": "Koramangala",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 5,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "Mini SUV"
+    },
+    {
+        "Name": "Tata Hexa XE",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1525356832_tatahexa.png",
+        "Price": 1980,
+        "Location": "HSR Layout",
+        "Availability": ["Mon","Tue", "Wed", "Thu", "Fri"],
+        "Seats": 7,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "SUV"
+    },
+    {
+        "Name": "Maruti Suzuki Ertiga",
+        "Photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1505393064_1500892647_etriga.webp",
+        "Price": 2000,
+        "Location": "HSR Layout",
+        "Availability": ["Sat", "Sun"],
+        "Seats": 7,
+        "Fuel_Type": "Diesel",
+        "Transmission": "Manual",
+        "Car_Type": "SUV"
+    }
+    ]
+
+	getUrlVars();
+	var data ;
+	function getUrlVars() {
+	var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+	var location = vars['location'];
+	var start_date = vars['start_date'];
+	var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	var d = new Date(start_date);
+	var dayName = days[d.getDay()];
+	if (location == 'HSR+Layout')
+		location = 'HSR Layout';
+	for (var i =0; i<16;i++) {
+		var is_valid = 0;
+		if (car_data[i].Location == location){
+			for (var j = 0; j < car_data[i]['Availability'].length ; j++) {
+				
+				if(dayName == car_data[i]['Availability'][j]){
+					is_valid =1;
+				}
+			}
+		}
+		if (is_valid == 1){
+			console.log(car_data[i])
+			var div = document.getElementById('cars');
+			div.innerHTML += '<div class="card"><div class="image"><img src="'+car_data[i].Photo+'"></div>\
+  <div class="content">\
+    <a class="header">'+car_data[i].Name+'</a>\
+    <div class="meta">\
+      <span class="date">Rs : '+ car_data[i].Price+'</span>\
+    </div>\
+    <div class="description">\
+      '+ car_data[i].Location+'\
+    </div>\
+  </div>\
+  <div class="extra content">\
+    <a>\
+      Seats : '+car_data[i].Seats+'\
+    </a>\
+    <div class="meta">\
+      <span class="date">Availability : '+ car_data[i].Availability+'</span>\
+    </div>\
+    <div class="meta">\
+      <span class="date">'+ car_data[i].Fuel_Type+'</span>\
+    </div>\
+    <div class="meta">\
+      <span class="date">'+ car_data[i].Transmission+'</span>\
+    </div>\
+    <div class="meta">\
+      <span class="date">'+ car_data[i].Car_Type+'</span>\
+    </div>\
+  </div>\
+</div>';
+		}
+	}
+	}
+
+</script>
+</html>
